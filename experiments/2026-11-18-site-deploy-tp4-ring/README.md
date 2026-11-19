@@ -91,3 +91,28 @@ The qualified tp4-ring profile (64 KiB pages, memory-saver, fan-control,
 same kernel, driver, module builds and memory policy; `doctor --live` kernel
 and memory findings clear. Remaining site divergence to watch: the disabled
 module guard (finding 1) and the fan-control cold-boot quirk (finding 2).
+
+## Addendum (2026-11-19): image limit 256 and the display carveout
+
+The site branch (Josh-Yi/spark-ds41f) raises `--limit-mm-per-prompt` to
+`{"image":256}` (record: `manifests/runtime-defaults/2026-11-19-images-256.json`)
+for multi-image agent compaction, whose clients resend history images.
+
+spark-attic 0.1.4 (display-carveout lender) is wired into the engine and lends
+2,044 MiB per rank to the KV cache (`SPARK_ATTIC_PLACE=kv`): the pool is now
+12.50 GiB = 10.50 GiB device + 2,044 MiB carveout on every rank. Three findings
+worth keeping:
+
+1. The carveout is lent on demand; installing atticd alone leaves `lent 0 MiB`.
+   The engine borrows through spark-attic's vLLM plugin, which needs the key
+   (`SPARK_ATTIC_KEY_FILE`) and the plugin package visible in the container.
+2. Our vLLM fork gates general plugins behind `VLLM_PLUGINS` as a whitelist;
+   the recipe's empty string parses as `['']` and silently loads NO plugin.
+   The site profile sets `VLLM_PLUGINS=spark_attic`.
+3. The container image sets `PYTHONPATH` to its candidate overlays; a site env
+   entry of the same name replaces it. The plugin package is mounted into
+   site-packages instead of touching PYTHONPATH.
+
+Xid 43 ("GPU stopped processing", one per worker node) appeared once, at the
+moment `cluster stop` tore down the vllm processes; no recurrence across the
+subsequent starts, and each node's journal holds no other Xid.
