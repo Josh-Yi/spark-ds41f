@@ -62,8 +62,13 @@
         "rw"
       ],
       [
-        "/usr/local/share/spark-attic/python",
-        "/opt/spark-attic/python",
+        "/usr/local/share/spark-attic/python/spark_attic",
+        "/usr/local/lib/python3.12/dist-packages/spark_attic",
+        "ro"
+      ],
+      [
+        "/usr/local/share/spark-attic/python/spark_attic-0.1.4.dist-info",
+        "/usr/local/lib/python3.12/dist-packages/spark_attic-0.1.4.dist-info",
         "ro"
       ],
       [
@@ -103,7 +108,6 @@
     "MALLOC_MMAP_THRESHOLD_": "1048576",
     "MAX_JOBS": "2",
     "OMP_NUM_THREADS": "8",
-    "PYTHONPATH": "/opt/spark-attic/python",
     "PYTORCH_CUDA_ALLOC_CONF": "expandable_segments:True,garbage_collection_threshold:0.6",
     "SAFETENSORS_FAST_GPU": "1",
     "SPARKNET_ROCE_ALLREDUCE_CAPACITY_BYTES": "2097152",
