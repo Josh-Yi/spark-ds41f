@@ -60,6 +60,21 @@
         "{checkout}/cache",
         "/cache",
         "rw"
+      ],
+      [
+        "/usr/local/share/spark-attic/python",
+        "/opt/spark-attic/python",
+        "ro"
+      ],
+      [
+        "/run/spark-attic",
+        "/run/spark-attic",
+        "ro"
+      ],
+      [
+        "/etc/spark-attic",
+        "/etc/spark-attic",
+        "ro"
       ]
     ]
   },
@@ -88,12 +103,14 @@
     "MALLOC_MMAP_THRESHOLD_": "1048576",
     "MAX_JOBS": "2",
     "OMP_NUM_THREADS": "8",
+    "PYTHONPATH": "/opt/spark-attic/python",
     "PYTORCH_CUDA_ALLOC_CONF": "expandable_segments:True,garbage_collection_threshold:0.6",
     "SAFETENSORS_FAST_GPU": "1",
     "SPARKNET_ROCE_ALLREDUCE_CAPACITY_BYTES": "2097152",
     "SPARKNET_ROCE_ALLREDUCE_DISPATCH_MAX_BYTES": "2097152",
     "SPARKNET_ROCE_PROXY_CPU": "big",
     "SPARKNET_ROCE_TIMEOUT_MS": "10000",
+    "SPARK_ATTIC_PLACE": "kv",
     "SPARK_DS41F_DSPARK_DEAD_ROWS_TAU": "0.2",
     "SPARK_DS41F_DSPARK_MAIN_PROJ_TP": "1",
     "SPARK_DS41F_DSPARK_VOCAB_PARALLEL": "1",
