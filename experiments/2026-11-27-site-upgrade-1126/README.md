@@ -96,23 +96,34 @@ operation attempted.
 
 ## Known divergences from the release recipe
 
-Two recipe-invariant checks in the unit suite fail on this branch, both because
-the site names its own deployment. They do not fail on the release tag:
+Five recipe-invariant checks fail on this branch and pass at the release tag; all
+of them encode "`config/cluster.json` is the owner's release", which a site fork
+breaks by naming its own deployment and image:
 
 - `tests/test_releases.py::test_production_is_the_newest_release` allows a site
 to differ from the frozen recipe only through `serve_options` (admission limits)
 and `site_fields` (`host.home`). This profile also changes
-`deployment.repository`, `deployment.branch` and `deployment.path`, which
-`docs/setup.md` tells a site to set, so the equality check reports them.
+`deployment.repository`, `deployment.branch`, `deployment.path` and
+`container.image`, which `docs/setup.md` tells a site to set.
 - `tests/test_site_defaults.py::NodeHomeTest.test_checkout_and_mounts_follow_it`
 asserts the recipe's `{home}/projects/spark-ds41f`; this site's checkout is
 `{home}/Projects/Scripts/spark-ds41f`.
+- `tests/test_topology.py::TopologyTest::test_former_repository_url_names_the_renamed_repository`
+asserts the recipe's `deployment.repository` is the owner's URL.
+- `tests/test_agentx.py::ArmTest::test_the_arm_is_production_but_its_port_and_usage_details`
+compares a committed experiment arm against the recipe, so the 256-image cap and
+the site image tag show up as differences.
+- `tests/test_releases.py::test_generated_docs_and_pages_match_manifests` passes
+once the generated pages are regenerated for this profile; it is listed here
+because regenerating them is a site-only change.
 
-The 256-image change and the regenerated `docs/current-state.md` row are handled
-by the existing record mechanism and pass. The clean fix is for
-`site_fields` to cover the three `deployment` keys; that belongs in a pull
-request to the owner rather than carried here, so this branch leaves the tests
-as released and records the failure instead.
+The 256-image change itself is handled by the existing record mechanism. The
+clean fix is for `site_fields` to cover the `deployment` keys and the image tag;
+that belongs in a pull request to the owner rather than carried here, so this
+branch leaves the tests as released and records the failures instead. The
+release tag itself is not green in this checkout either: seven tests fail there
+for unrelated reasons (the candidate patch series are not prepared in `.work/`,
+and the lab plan tests expect the head's node map).
 
 ## Conclusion
 
