@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "baseline": "2026-11-07-spark-ds41f-1107",
+  "date": "2026-11-19",
+  "reason": "Site profile raises the per-request image limit for multi-image agent compaction, whose clients resend history images. The display carveout lender (spark-attic 0.1.4, 2,044 MiB) is active on all four nodes, adding headroom for the per-request host memory spike.",
+  "serve_options": {
+    "--limit-mm-per-prompt": {
+      "before": "{\"image\":67}",
+      "after": "{\"image\":256}"
+    }
+  },
+  "qualification": "Site change carried on the deployment fork's site branch; not serving-qualified. Host memory per in-flight image follows source pixels, not tokens (experiments/2026-10-26-site-landmines: 19 MiB at 1,302 px, 61-74 MiB at 12 MP); the VLLM_MAX_IMAGE_PIXELS=16777216 cap is unchanged and still rejects oversized images before decoding. Requests over about 620 images of 1K tokens would exhaust the 1,048,576-token context before this limit."
+}
