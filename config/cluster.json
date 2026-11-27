@@ -195,7 +195,7 @@
     "--no-scheduler-reserve-full-isl",
     "--no-enable-flashinfer-autotune",
     "--limit-mm-per-prompt",
-    "{\"image\":67}",
+    "{\"image\":256}",
     "--mm-processor-cache-gb",
     "0",
     "--prefill-yield",
@@ -211,9 +211,9 @@
   },
   "deployment": {
     "launch_enabled": true,
-    "repository": "https://github.com/christopherowen/spark-ds41f.git",
-    "branch": "main",
-    "path": "{home}/projects/spark-ds41f",
+    "repository": "https://github.com/Josh-Yi/spark-ds41f.git",
+    "branch": "site-1126",
+    "path": "{home}/Projects/Scripts/spark-ds41f",
     "ready_url": "http://127.0.0.1:8000/v1/models",
     "ready_timeout_seconds": 3600
   },
