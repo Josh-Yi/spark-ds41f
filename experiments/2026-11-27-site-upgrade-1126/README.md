@@ -53,11 +53,13 @@ The site's 1107 deployment is in
 # local, before touching the cluster
 bin/spark doctor
 git diff --check
-bin/spark build check
 
-# image: build a distinct tag; never overwrite spark-ds41f:1126
+# image: the profile names spark-ds41f:1126-site1, so the release tag is never
+# overwritten. build image refuses to run beside a live service, so this step
+# needs the same window as the cluster work below.
 bin/spark build prepare
 bin/spark build image --apply        # -> spark-ds41f:1126-site1
+bin/spark build check
 bin/spark build distribute --apply
 
 # cluster (needs the window hold in ~/spark-hold.json)

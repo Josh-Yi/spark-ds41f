@@ -33,7 +33,7 @@
   },
   "container": {
     "name": "spark-ds41f",
-    "image": "spark-ds41f:1126",
+    "image": "spark-ds41f:1126-site1",
     "expected_labels": {
       "local.spark-ds41f.vllm.tree": "f3783b0ec61851ba481f6a3a316d0a76d0e171d8",
       "local.spark-ds41f.nccl.tree": "6af10aa730a64fcee8781d62340a9c9184e79469",
