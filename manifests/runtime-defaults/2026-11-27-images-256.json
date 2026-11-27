@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "baseline": "2026-11-26-spark-ds41f-1126",
+  "date": "2026-11-27",
+  "reason": "Site profile keeps 256 images per request for multi-image agent compaction, whose clients resend conversation-history images. Carried forward from the site's 1107-era change (2026-11-19-images-256.json); the upstream default remains 67, and the frozen 1120 recipe qualified at 16.",
+  "serve_options": {
+    "--limit-mm-per-prompt": {
+      "before": "{\"image\":67}",
+      "after": "{\"image\":256}"
+    }
+  },
+  "qualification": "Site change carried on the deployment fork's branch; not serving-qualified. The 2026-11-19 record justified the limit partly by spark-attic's 2,044 MiB lending to the KV pool; this profile does not load spark-attic, so the margin it relies on is spark-ds41f-1126's own: 16.50 GiB KV pool per rank, max_num_seqs 32, and the promotion's minimum MemAvailable of 13.68-16.09 GiB. Host memory per in-flight image follows source pixels, not tokens (experiments/2026-10-26-site-landmines: 19 MiB at 1,302 px, 61-74 MiB at 12 MP, 310 MiB at 48 MP); VLLM_MAX_IMAGE_PIXELS=16777216 is unchanged and still rejects oversized images before decoding. Requests over about 620 images of 1K tokens exhaust the 1,048,576-token context before this limit, so the binding cost is the request's KV blocks plus the head's host decode buffers. To be measured in experiments/2026-11-27-site-upgrade-1126."
+}
