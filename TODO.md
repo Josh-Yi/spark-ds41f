@@ -120,7 +120,7 @@ before tuning anything on this basis.
 ## Next release
 
 <!-- BEGIN GENERATED: next-release-status -->
-Production is **spark-ds41f-1126** (`manifests/baselines/2026-11-26-spark-ds41f-1126.json`, image `spark-ds41f:1126`), promoted 2026-11-26 across all 16 shapes: `tp4-ring` ([suite reference](manifests/suites/2026-11-26-spark-ds41f-1126-tp4/)), `tp3-triangle` ([suite reference](manifests/suites/2026-11-26-spark-ds41f-1126-tp3/)), `tp3-triangle-4k`, `tp2-direct`, `tp1`, and `tp2-switched`..`tp8-switched` ([release record](experiments/2026-10-26-spark-ds41f-candidate/README.md)).
+Production is **spark-ds41f-1126** (`manifests/baselines/2026-11-26-spark-ds41f-1126.json`, image `spark-ds41f:1126-site1`), promoted 2026-11-26 across all 16 shapes: `tp4-ring` ([suite reference](manifests/suites/2026-11-26-spark-ds41f-1126-tp4/)), `tp3-triangle` ([suite reference](manifests/suites/2026-11-26-spark-ds41f-1126-tp3/)), `tp3-triangle-4k`, `tp2-direct`, `tp1`, and `tp2-switched`..`tp8-switched` ([release record](experiments/2026-10-26-spark-ds41f-candidate/README.md)).
 <!-- END GENERATED: next-release-status -->
 
 Open after `1120`:
