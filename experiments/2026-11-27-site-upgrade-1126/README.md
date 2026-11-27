@@ -104,11 +104,17 @@ bin/spark bench --suite release --shape tp4-ring
   master-key path was verified end to end. Unknown virtual keys still answer
   "No connected db" (`database_url: null`); the site's clients use the master
   key. Host-side change, not in this repository.
-- Fan noise under load is the fan controller working as designed: no fan
-  setting was changed. `dgx-fan-control` is a temperature-driven additive
-  floor (journal: state 0 -> 8 within 30 s as the SoC went 44 -> 63 C under
-  client prefill load; 9,000 RPM at floor 8). The bench raises the floor only
-  during its cooling phase and restores it afterwards.
+- Fan noise: no fan setting was changed, but the fan behaviour was. The
+  `dgx-fan-control` fan-floor daemon (installed 2026-11-18, `disabled`, never
+  started since; the journal has zero entries for it before today) was
+  started by the bench's `start_fan_curve` measurement condition ("its numbers
+  are not comparable with a reference that ran the curve") and left running
+  when run 4 was aborted before `stop_fan_curve`. As a temperature-driven
+  additive floor it raised the fans to 9,000 RPM (state 8/12) under client
+  prefill load where the stock EC curve had kept them quiet all week. Stopped
+  on all four nodes after the diagnosis (`systemctl stop dgx-fan-control`;
+  fans fell to 2,790 RPM); the service stays disabled and future bench runs
+  start and stop it around their measurements.
 
 ## Variables
 
