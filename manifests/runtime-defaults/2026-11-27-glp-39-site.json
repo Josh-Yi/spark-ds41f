@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "baseline": "2026-11-26-spark-ds41f-1126",
+  "date": "2026-11-27",
+  "reason": "Site profile steers the weightless name with GLP-39 (39 layers L1-39, alpha 0.75), not the release's GLP-27 spec-3 (L11-37, alpha 2.0, temperature 0.3 / top_p 0.95). The site has no style requirement and keeps the familiar GLP-39 vector it served under 1107 (2026-11-18-site-deploy-tp4-ring). The upstream recipe's GLP-27 choice is untouched; both vectors' hub caches are kept on every node.",
+  "glp": {
+    "before": {
+      "repo": "msuiche/DeepSeek-V4.1-Flash-1017-abliterated-cyber-GLP-27-L11-37-a3.5",
+      "revision": "4d570926e9dd4fa7247d126072c34e249c89abd7",
+      "file": "glp.deepseek-v41-flash-1017-GLP-27-L11-37-a3.5.gguf",
+      "sha256": "24e97d41a9a4f77adad78ff4cb888cb4e339eb62151dbf37a7fcd3ea30eb442e",
+      "alpha": 2.0,
+      "generation_defaults": {
+        "temperature": 0.3,
+        "top_p": 0.95
+      }
+    },
+    "after": {
+      "repo": "msuiche/DeepSeek-V4.1-Flash-1017-abliterated-cyber-GLP-39-L1-39-a0.75",
+      "revision": "f14422afd7acd4de86f354ef7d1de915ff7db569",
+      "file": "glp.deepseek-v41-flash-1017-GLP-39-L1-39-a0.75.gguf",
+      "sha256": "9c66d47701e0ceb42c33906f2d3789c0f1f16b21e7d97185f20f7f3f09fbf5cf",
+      "alpha": 0.75,
+      "generation_defaults": null
+    }
+  },
+  "qualification": "Site change carried on the deployment fork's branch; not serving-qualified. Revision f14422af (repository head, 2026-10-30) carries the same vector blob as the 1107-era pin 2715ffd5: sha256 9c66d477, 803,392 bytes. Alpha 0.75 and no generation defaults reproduce the 1107-era serving of this vector. The 1126 recipe's GLP-27 settings (alpha 2.0, temperature 0.3 / top_p 0.95) are tuned to GLP-27 and are deliberately not applied to GLP-39."
+}
